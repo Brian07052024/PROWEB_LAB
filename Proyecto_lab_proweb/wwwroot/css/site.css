@@ -1,0 +1,250 @@
+html {
+  font-size: 14px;
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f8f9fa;
+}
+
+/* El contenido principal debe crecer para empujar el footer al fondo */
+.container-fluid {
+  flex: 1 0 auto;
+}
+
+/* El footer debe quedarse al fondo */
+footer {
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+/* Estilos del navbar */
+.navbar {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+.navbar-brand {
+ font-weight: 600;
+}
+
+.nav-link {
+    transition: color 0.2s ease;
+}
+
+/* Estilos de tarjetas */
+.card {
+    border-radius: 0.75rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+ box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos de tablas */
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+ font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+/* Estilos de botones */
+.btn {
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #0a58ca 0%, #084298 100%);
+    transform: translateY(-1px);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #198754 0%, #146c43 100%);
+    border: none;
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #146c43 0%, #0d5034 100%);
+    transform: translateY(-1px);
+}
+
+/* Estilos de badges */
+.badge {
+    font-weight: 500;
+    padding: 0.5em 0.75em;
+}
+
+/* Estilos de formularios */
+.form-control, .form-select {
+    border-radius: 0.5rem;
+    border: 1px solid #dee2e6;
+    padding: 0.625rem 0.875rem;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+.input-group-text {
+ border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.input-group .form-control {
+ border-radius: 0 0.5rem 0.5rem 0;
+}
+
+/* Estilos de alertas */
+.alert {
+    border: none;
+    border-radius: 0.75rem;
+}
+
+/* Estilos de paginacion */
+.pagination {
+  gap: 0.25rem;
+}
+
+.page-item .page-link {
+    border-radius: 0.5rem;
+    border: none;
+    padding: 0.5rem 0.875rem;
+    color: #6c757d;
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.page-item.active .page-link {
+ background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    color: #fff;
+}
+
+.page-item:not(.active) .page-link:hover {
+    background-color: #e9ecef;
+    color: #0d6efd;
+}
+
+.page-item.disabled .page-link {
+ background-color: #f8f9fa;
+    color: #adb5bd;
+}
+
+/* Estilos de dropdown */
+.dropdown-menu {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    padding: 0.5rem;
+}
+
+.dropdown-item {
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease;
+}
+
+.dropdown-menu-dark .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Estilos para estadisticas del dashboard */
+.stat-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+ width: 100px;
+    height: 100px;
+    background: currentColor;
+    opacity: 0.1;
+    border-radius: 50%;
+    transform: translate(25%, -25%);
+}
+
+/* Animaciones sutiles */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Estilos para la barra de progreso */
+.progress {
+    border-radius: 0.5rem;
+    background-color: #e9ecef;
+}
+
+.progress-bar {
+    border-radius: 0.5rem;
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+}
+
+/* Utilidades adicionales */
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.rounded-4 {
+    border-radius: 1rem !important;
+}
+
+/* Estilos responsivos adicionales */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .display-5 {
+        font-size: 1.75rem;
+    }
+    
+    .btn-lg {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+}

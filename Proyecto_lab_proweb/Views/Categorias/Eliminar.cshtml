@@ -1,0 +1,45 @@
+@model Proyecto_lab_proweb.Models.Categoria
+
+@{
+    ViewData["Title"] = "Eliminar Categoría";
+}
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+ <hr />
+    
+<div class="alert alert-warning">
+  <h4>¿Está seguro que desea eliminar esta categoría?</h4>
+    </div>
+  
+    <div class="card">
+    <div class="card-body">
+   <dl class="row">
+  <dt class="col-sm-3">Nombre</dt>
+     <dd class="col-sm-9">@Model.Nombre</dd>
+ 
+   <dt class="col-sm-3">Descripción</dt>
+       <dd class="col-sm-9">@Model.Descripcion</dd>
+   
+   <dt class="col-sm-3">Productos</dt>
+   <dd class="col-sm-9">
+     <span class="badge bg-info">@Model.Productos.Count productos</span>
+    </dd>
+    </dl>
+    </div>
+  </div>
+    
+    @if (Model.Productos.Any())
+ {
+        <div class="alert alert-danger mt-3">
+     <strong>Advertencia:</strong> Esta categoría tiene @Model.Productos.Count producto(s) asociado(s).
+   No se podrá eliminar hasta que se reasignen o eliminen los productos.
+  </div>
+    }
+    
+    <form asp-action="Eliminar" method="post" class="mt-3">
+  <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger" @(Model.Productos.Any() ? "disabled" : "")>Eliminar</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

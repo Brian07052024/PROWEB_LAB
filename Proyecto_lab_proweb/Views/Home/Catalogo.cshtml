@@ -1,0 +1,200 @@
+@model Proyecto_lab_proweb.ViewModels.CatalogoViewModel
+
+@{
+    ViewData["Title"] = "Catalogo de Productos";
+}
+
+<div class="container">
+    <!-- Encabezado -->
+  <div class="text-center mb-5">
+    <h1 class="display-5 fw-bold">
+      <i class="bi bi-grid me-2"></i>Catalogo de Productos
+        </h1>
+     <p class="lead text-muted">Explora nuestra amplia seleccion de productos disponibles</p>
+</div>
+
+    <!-- Filtros y Busqueda -->
+    <div class="card border-0 shadow-sm mb-4">
+ <div class="card-body">
+      <form method="get" asp-action="Catalogo" class="row g-3">
+     <div class="col-md-4">
+   <div class="input-group">
+       <span class="input-group-text bg-white">
+       <i class="bi bi-search"></i>
+  </span>
+       <input type="text" name="busqueda" class="form-control" 
+  placeholder="Buscar productos..." 
+          value="@Model.TerminoBusqueda" />
+         </div>
+ </div>
+    <div class="col-md-3">
+        <select name="categoriaId" class="form-select">
+    <option value="">-- Todas las categorias --</option>
+         @foreach (var categoria in Model.Categorias)
+            {
+        <option value="@categoria.Id" selected="@(Model.CategoriaSeleccionada == categoria.Id)">
+         @categoria.Nombre
+         </option>
+   }
+            </select>
+    </div>
+     <div class="col-md-3">
+            <select name="ordenar" class="form-select">
+         <option value="" selected="@(string.IsNullOrEmpty(Model.OrdenarPor))">Ordenar por nombre</option>
+              <option value="precio_asc" selected="@(Model.OrdenarPor == "precio_asc")">Precio: menor a mayor</option>
+         <option value="precio_desc" selected="@(Model.OrdenarPor == "precio_desc")">Precio: mayor a menor</option>
+          <option value="nombre_desc" selected="@(Model.OrdenarPor == "nombre_desc")">Nombre: Z-A</option>
+    </select>
+        </div>
+    <div class="col-md-2">
+    <div class="d-flex gap-2">
+ <button type="submit" class="btn btn-primary flex-grow-1">
+    <i class="bi bi-filter"></i> Filtrar
+      </button>
+       <a asp-action="Catalogo" class="btn btn-outline-secondary">
+    <i class="bi bi-x-lg"></i>
+           </a>
+   </div>
+           </div>
+        </form>
+  </div>
+  </div>
+
+ <!-- Informacion de resultados -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+   <span class="text-muted">
+ @if (Model.TotalRegistros > 0)
+     {
+<span class="badge bg-primary me-2">@Model.TotalRegistros</span>
+      <text>producto(s) encontrado(s)</text>
+  }
+     else
+     {
+   <text>No se encontraron productos</text>
+  }
+ </span>
+ </div>
+
+ <!-- Grid de Productos -->
+    @if (Model.Productos.Any())
+ {
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4">
+   @foreach (var producto in Model.Productos)
+  {
+  <div class="col">
+    <div class="card h-100 border-0 shadow-sm producto-card">
+ <div class="card-body">
+  <div class="d-flex justify-content-between align-items-start mb-2">
+       <span class="badge bg-secondary">@producto.Categoria?.Nombre</span>
+     @if (producto.Stock <= 10)
+   {
+     <span class="badge bg-warning text-dark">
+       <i class="bi bi-exclamation-triangle me-1"></i>Ultimas unidades
+     </span>
+       }
+          </div>
+       <h5 class="card-title">@producto.Nombre</h5>
+      <p class="card-text text-muted small">
+ @(producto.Descripcion?.Length > 100 ? producto.Descripcion.Substring(0, 100) + "..." : producto.Descripcion)
+         </p>
+         <div class="d-flex justify-content-between align-items-center mt-3">
+    <div>
+       <span class="fs-4 fw-bold text-primary">@producto.Precio.ToString("C")</span>
+    </div>
+  <div class="text-end">
+     <span class="badge @(producto.Stock > 10 ? "bg-success" : "bg-warning text-dark")">
+     <i class="bi bi-box me-1"></i>@producto.Stock en stock
+        </span>
+        </div>
+   </div>
+       @if (producto.Proveedor != null)
+        {
+      <div class="mt-2 pt-2 border-top">
+  <small class="text-muted">
+       <i class="bi bi-truck me-1"></i>@producto.Proveedor.Nombre
+     </small>
+   </div>
+     }
+         </div>
+   </div>
+    </div>
+            }
+        </div>
+
+   <!-- Paginacion -->
+        @if (Model.TotalPaginas > 1)
+        {
+    <nav class="mt-4">
+   <ul class="pagination justify-content-center">
+    <li class="page-item @(Model.TienePaginaAnterior ? "" : "disabled")">
+          <a class="page-link" asp-action="Catalogo"
+   asp-route-busqueda="@Model.TerminoBusqueda"
+       asp-route-categoriaId="@Model.CategoriaSeleccionada"
+      asp-route-ordenar="@Model.OrdenarPor"
+     asp-route-pagina="@(Model.PaginaActual - 1)">
+      <i class="bi bi-chevron-left"></i> Anterior
+  </a>
+  </li>
+  
+     @for (int i = 1; i <= Model.TotalPaginas; i++)
+      {
+   var paginaActiva = i == Model.PaginaActual;
+   if (i == 1 || i == Model.TotalPaginas || (i >= Model.PaginaActual - 2 && i <= Model.PaginaActual + 2))
+        {
+         <li class="page-item @(paginaActiva ? "active" : "")">
+   <a class="page-link" asp-action="Catalogo"
+      asp-route-busqueda="@Model.TerminoBusqueda"
+ asp-route-categoriaId="@Model.CategoriaSeleccionada"
+   asp-route-ordenar="@Model.OrdenarPor"
+      asp-route-pagina="@i">@i</a>
+    </li>
+       }
+   else if (i == Model.PaginaActual - 3 || i == Model.PaginaActual + 3)
+         {
+<li class="page-item disabled">
+     <span class="page-link">...</span>
+      </li>
+    }
+      }
+       
+    <li class="page-item @(Model.TienePaginaSiguiente ? "" : "disabled")">
+         <a class="page-link" asp-action="Catalogo"
+       asp-route-busqueda="@Model.TerminoBusqueda"
+      asp-route-categoriaId="@Model.CategoriaSeleccionada"
+ asp-route-ordenar="@Model.OrdenarPor"
+  asp-route-pagina="@(Model.PaginaActual + 1)">
+   Siguiente <i class="bi bi-chevron-right"></i>
+ </a>
+           </li>
+ </ul>
+     </nav>
+        }
+    }
+ else
+    {
+     <!-- Sin resultados -->
+ <div class="text-center py-5">
+ <i class="bi bi-inbox display-1 text-muted"></i>
+    <h4 class="mt-3">No se encontraron productos</h4>
+            <p class="text-muted">
+    Intenta ajustar los filtros de busqueda o explora todas las categorias.
+   </p>
+     @if (!string.IsNullOrWhiteSpace(Model.TerminoBusqueda) || Model.CategoriaSeleccionada.HasValue)
+       {
+        <a asp-action="Catalogo" class="btn btn-primary">
+    <i class="bi bi-arrow-clockwise me-1"></i>Ver todos los productos
+          </a>
+ }
+    </div>
+    }
+</div>
+
+<style>
+    .producto-card {
+ transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .producto-card:hover {
+   transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+</style>

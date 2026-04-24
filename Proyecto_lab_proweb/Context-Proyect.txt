@@ -1,0 +1,110 @@
+﻿Create a complete ASP.NET Core MVC web application for a university project.
+
+Requirements:
+
+Architecture:
+
+* Use ASP.NET Core MVC
+* Use Entity Framework Core with SQL Server
+* Use ASP.NET Core Identity for authentication and roles
+* Use Razor Views
+* Use Bootstrap 5 for styling
+* Follow MVC best practices (Models, Views, Controllers)
+* Use Repository pattern if possible
+
+System Description:
+Build a simple Inventory Management System where administrators manage products and categories and normal users can view the inventory.
+
+Roles:
+
+* Admin
+* User
+
+Authentication:
+
+* Login
+* Register
+* Role-based authorization
+
+Database Entities:
+
+Category
+
+* Id (int, primary key)
+* Name (string)
+* Description (string)
+
+Product
+
+* Id (int, primary key)
+* Name (string)
+* Description (string)
+* Price (decimal)
+* Stock (int)
+* CategoryId (foreign key)
+
+Supplier
+
+* Id (int)
+* Name (string)
+* Email (string)
+* Phone (string)
+
+Relationships:
+
+* Category has many Products
+* Supplier can supply many Products
+
+Features:
+
+Public Pages:
+
+1. Home page
+2. About page
+3. Contact page
+4. Product catalog page (list products from database)
+
+Authentication:
+5. Login page
+6. Register page
+
+Admin Pages:
+7. Product Management (CRUD)
+8. Category Management (CRUD)
+9. Supplier Management (CRUD)
+
+CRUD Requirements:
+
+* Create
+* Read (list with table)
+* Update
+* Delete
+* Use Entity Framework Core
+
+UI Requirements:
+
+* Use Bootstrap tables for listings
+* Use forms for create and edit
+* Use validation with DataAnnotations
+* Show success/error messages
+
+Extra Requirements:
+
+* Use ViewModels where appropriate
+* Implement role-based access control (only Admin can access CRUD pages)
+* Seed the database with sample categories and products
+* Organize controllers into logical structure
+
+Deliverables in the generated project:
+
+* Models
+* DbContext
+* Controllers
+* Views (Razor)
+* Identity configuration
+* Migration and database setup
+* Example seed data
+
+The project should be clean, well-structured, and ready to run in Visual Studio with SQL Server LocalDB.
+
+DONT USE EMOJIS IN THE COMENTS, AND REMEMBER, WRITE ALL THE CODE IN SPANISH, PLEASE, ALL THE VARIABLES, TEXT, ETC. IN SPANISH!

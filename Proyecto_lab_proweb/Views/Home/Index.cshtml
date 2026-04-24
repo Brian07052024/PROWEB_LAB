@@ -1,0 +1,163 @@
+﻿@{
+	ViewData["Title"] = "Inicio";
+}
+
+<div class="container">
+	<!-- Hero Section -->
+	<div class="row align-items-center py-5">
+		<div class="col-lg-6">
+			<h1 class="display-4 fw-bold mb-3">
+				Bienvenido al<br />
+				<span class="text-primary">Sistema de Inventario</span>
+			</h1>
+			<p class="lead text-muted mb-4">
+				Gestion eficiente de productos, categorias y proveedores.
+				Explora nuestro catalogo o administra tu inventario de manera profesional.
+			</p>
+			<div class="d-flex gap-3 flex-wrap">
+				<a asp-controller="Home" asp-action="Catalogo" class="btn btn-primary btn-lg">
+					<i class="bi bi-grid me-2"></i>Ver Catalogo
+				</a>
+				@if (!User.Identity?.IsAuthenticated ?? true)
+				{
+					<a asp-controller="Cuenta" asp-action="Registro" class="btn btn-outline-primary btn-lg">
+						<i class="bi bi-person-plus me-2"></i>Registrarse
+					</a>
+				}
+			</div>
+		</div>
+		<div class="col-lg-6 text-center">
+			<img src="https://cdn-icons-png.flaticon.com/512/2271/2271113.png" alt="Inventario" class="img-fluid" style="max-height: 400px;" />
+		</div>
+	</div>
+
+	<!-- Estadisticas Rapidas -->
+	<div class="row g-4 py-5">
+		<div class="col-md-4">
+			<div class="card border-0 shadow-sm text-center h-100">
+				<div class="card-body py-4">
+					<div class=" d-inline-flex p-4 mb-3">
+						<i class="bi bi-box text-primary fs-1"></i>
+					</div>
+					<h2 class="fw-bold text-primary">@ViewData["TotalProductos"]</h2>
+					<p class="text-muted mb-0">Productos Disponibles</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="card border-0 shadow-sm text-center h-100">
+				<div class="card-body py-4">
+					<div class=" d-inline-flex p-4 mb-3">
+						<i class="bi bi-tags text-success fs-1"></i>
+					</div>
+					<h2 class="fw-bold text-success">@ViewData["TotalCategorias"]</h2>
+					<p class="text-muted mb-0">Categorias</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="card border-0 shadow-sm text-center h-100">
+				<div class="card-body py-4">
+					<div class=" d-inline-flex p-4 mb-3">
+						<i class="bi bi-shield-check text-info fs-1"></i>
+					</div>
+					<h2 class="fw-bold text-info">100%</h2>
+					<p class="text-muted mb-0">Garantia de Calidad</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Caracteristicas -->
+	<div class="py-5">
+		<div class="text-center mb-5">
+			<h2 class="fw-bold">Caracteristicas del Sistema</h2>
+			<p class="text-muted">Todo lo que necesitas para gestionar tu inventario</p>
+		</div>
+		<div class="row g-4">
+			<div class="col-md-4">
+				<div class="card border-0 h-100">
+					<div class="card-body">
+						<i class="bi bi-box-seam fs-2 text-primary mb-3 d-block"></i>
+						<h5 class="card-title">Gestion de Productos</h5>
+						<p class="card-text text-muted">
+							Administra tu inventario con informacion detallada de cada producto,
+							incluyendo precios, stock y descripciones.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card border-0 h-100">
+					<div class="card-body">
+						<i class="bi bi-tags fs-2 text-success mb-3 d-block"></i>
+						<h5 class="card-title">Categorias Organizadas</h5>
+						<p class="card-text text-muted">
+							Organiza tus productos en categorias para facilitar
+							la busqueda y navegacion en el catalogo.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card border-0 h-100">
+					<div class="card-body">
+						<i class="bi bi-truck fs-2 text-info mb-3 d-block"></i>
+						<h5 class="card-title">Control de Proveedores</h5>
+						<p class="card-text text-muted">
+							Gestiona la informacion de tus proveedores y
+							mantien un registro de sus productos asociados.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card border-0 h-100">
+					<div class="card-body">
+						<i class="bi bi-shield-lock fs-2 text-warning mb-3 d-block"></i>
+						<h5 class="card-title">Seguridad por Roles</h5>
+						<p class="card-text text-muted">
+							Sistema de autenticacion con roles de usuario
+							para control de acceso a funciones administrativas.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card border-0 h-100">
+					<div class="card-body">
+						<i class="bi bi-search fs-2 text-danger mb-3 d-block"></i>
+						<h5 class="card-title">Busqueda Avanzada</h5>
+						<p class="card-text text-muted">
+							Encuentra productos rapidamente con filtros
+							por nombre, categoria y otras caracteristicas.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card border-0 h-100">
+					<div class="card-body">
+						<i class="bi bi-graph-up fs-2 text-secondary mb-3 d-block"></i>
+						<h5 class="card-title">Dashboard Informativo</h5>
+						<p class="card-text text-muted">
+							Panel de control con estadisticas y metricas
+							clave para tomar decisiones informadas.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Llamada a la Accion -->
+	<div class="text-center py-5 bg-light rounded-4 mb-5">
+		<h3 class="fw-bold mb-3">Comienza a explorar nuestro catalogo</h3>
+		<p class="text-muted mb-4">
+			Descubre todos los productos disponibles en nuestro sistema
+		</p>
+		<a asp-controller="Home" asp-action="Catalogo" class="btn btn-primary btn-lg">
+			<i class="bi bi-arrow-right me-2"></i>Ir al Catalogo
+		</a>
+	</div>
+</div>

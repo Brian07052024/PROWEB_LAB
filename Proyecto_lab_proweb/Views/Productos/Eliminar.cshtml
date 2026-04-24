@@ -1,0 +1,62 @@
+@model Proyecto_lab_proweb.Models.Producto
+
+@{
+    ViewData["Title"] = "Eliminar Producto";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+    <div class="col-lg-6">
+     <div class="card border-0 shadow-sm">
+   <div class="card-header bg-danger text-white">
+      <h5 class="mb-0">
+ <i class="bi bi-exclamation-triangle me-2"></i>Confirmar Eliminacion
+      </h5>
+        </div>
+   <div class="card-body p-4">
+      <div class="alert alert-warning d-flex align-items-center">
+         <i class="bi bi-exclamation-triangle-fill me-2 fs-4"></i>
+<div>
+             <strong>Atencion:</strong> Esta accion no se puede deshacer.
+ </div>
+    </div>
+
+        <div class="text-center mb-4">
+ <div class="bg-danger bg-opacity-10 rounded-circle d-inline-flex p-4 mb-3">
+   <i class="bi bi-box text-danger fs-1"></i>
+</div>
+      <h4>@Model.Nombre</h4>
+     <span class="badge bg-secondary">@Model.Categoria?.Nombre</span>
+     </div>
+
+  <dl class="row">
+   <dt class="col-sm-4 text-muted">Precio:</dt>
+   <dd class="col-sm-8">@Model.Precio.ToString("C")</dd>
+
+   <dt class="col-sm-4 text-muted">Stock:</dt>
+  <dd class="col-sm-8">@Model.Stock unidades</dd>
+
+      <dt class="col-sm-4 text-muted">Proveedor:</dt>
+         <dd class="col-sm-8">@(Model.Proveedor?.Nombre ?? "Sin proveedor")</dd>
+
+        <dt class="col-sm-4 text-muted">Descripcion:</dt>
+       <dd class="col-sm-8">@(Model.Descripcion ?? "Sin descripcion")</dd>
+    </dl>
+</div>
+   <div class="card-footer bg-light border-0 p-3">
+    <form asp-action="Eliminar" method="post">
+           <input type="hidden" asp-for="Id" />
+  <div class="d-flex justify-content-end gap-2">
+      <a asp-action="Index" class="btn btn-outline-secondary">
+     <i class="bi bi-x-lg me-1"></i>Cancelar
+    </a>
+        <button type="submit" class="btn btn-danger">
+        <i class="bi bi-trash me-1"></i>Eliminar Producto
+     </button>
+      </div>
+     </form>
+   </div>
+  </div>
+        </div>
+    </div>
+</div>
