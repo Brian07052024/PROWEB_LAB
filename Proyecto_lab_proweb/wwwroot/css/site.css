@@ -252,3 +252,11 @@ body {
     background-color: #f4f6f9;
     font-family: 'Segoe UI', sans-serif;
 }
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+}
+
+    .form-control:focus {
+        box-shadow: 0 0 0 0.2rem rgba(37,99,235,0.2);
+    }
