@@ -24,6 +24,7 @@ namespace Proyecto_lab_proweb.Controllers
             return View(categorias);
         }
 
+        //[HttpGet]
         public async Task<IActionResult> Detalles(int? id)
         {
             if (id == null)
