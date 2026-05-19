@@ -1,80 +1,80 @@
 @model IEnumerable<Proyecto_lab_proweb.Models.Proveedor>
 
 @{
-    ViewData["Title"] = "Proveedores";
+	ViewData["Title"] = "Proveedores";
 }
 
 <div class="container-fluid">
-    <!-- Encabezado -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-     <div>
-  <h1 class="h3 mb-0">
-    <i class="bi bi-truck me-2"></i>Gestion de Proveedores
-  </h1>
-<p class="text-muted mb-0">Administra la informacion de proveedores</p>
- </div>
-  <a asp-action="Crear" class="btn btn-info">
-      <i class="bi bi-plus-lg me-1"></i>Nuevo Proveedor
-        </a>
-    </div>
+	<!-- Encabezado -->
+	<div class="d-flex justify-content-between align-items-center mb-4">
+		<div>
+			<h1 class="h3 mb-0">
+				<i class="bi bi-truck me-2"></i>Gestion de Proveedores
+			</h1>
+			<p class="text-muted mb-0">Administra la informacion de proveedores</p>
+		</div>
+		<a asp-action="Crear" class="btn btn-info">
+			<i class="bi bi-plus-lg me-1"></i>Nuevo Proveedor
+		</a>
+	</div>
 
-    <!-- Tarjetas de Proveedores -->
-  <div class="row g-4">
-   @if (Model.Any())
-        {
-     @foreach (var proveedor in Model)
-            {
-       <div class="col-md-6 col-lg-4">
-  <div class="card border-0 shadow-sm h-100">
-   <div class="card-body">
-     <div class="d-flex justify-content-between align-items-start mb-3">
-      <div class="bg-info bg-opacity-10 rounded-circle p-3">
-      <i class="bi bi-truck text-info fs-4"></i>
-      </div>
-<span class="badge bg-primary">@proveedor.Productos.Count productos</span>
-     </div>
-    <h5 class="card-title mb-1">@proveedor.Nombre</h5>
-       <div class="mb-3">
-     <p class="card-text mb-1">
-<i class="bi bi-envelope me-2 text-muted"></i>
-   <a href="mailto:@proveedor.Email" class="text-decoration-none">@proveedor.Email</a>
- </p>
- <p class="card-text mb-0">
-      <i class="bi bi-telephone me-2 text-muted"></i>
-          <span>@proveedor.Telefono</span>
-       </p>
-   </div>
-     </div>
-<div class="card-footer bg-transparent border-0 pt-0">
-          <div class="d-flex justify-content-end gap-2">
-<a asp-action="Detalles" asp-route-id="@proveedor.Id" class="btn btn-sm btn-outline-info">
-   <i class="bi bi-eye me-1"></i>Detalles
- </a>
-  <a asp-action="Editar" asp-route-id="@proveedor.Id" class="btn btn-sm btn-outline-warning">
-       <i class="bi bi-pencil me-1"></i>Editar
-    </a>
-      <a asp-action="Eliminar" asp-route-id="@proveedor.Id" class="btn btn-sm btn-outline-danger">
-          <i class="bi bi-trash"></i>
-        </a>
- </div>
-         </div>
-  </div>
- </div>
-       }
-        }
-    else
-        {
-   <div class="col-12">
-     <div class="card border-0 shadow-sm">
-         <div class="card-body text-center py-5">
-          <i class="bi bi-inbox fs-1 text-muted"></i>
-        <p class="text-muted mt-2 mb-3">No hay proveedores registrados</p>
-<a asp-action="Crear" class="btn btn-info">
-  <i class="bi bi-plus-lg me-1"></i>Crear primer proveedor
-     </a>
-   </div>
-      </div>
-   </div>
-        }
-    </div>
+	<!-- Tarjetas de Proveedores -->
+	<div class="row g-4">
+		@if (Model.Any())
+		{
+			@foreach (var proveedor in Model)
+			{
+				<div class="col-md-6 col-lg-4">
+					<div class="card border-0 shadow-sm h-100">
+						<div class="card-body">
+							<div class="d-flex justify-content-between align-items-start mb-3">
+								<div class="bg-info bg-opacity-10 rounded-circle p-3">
+									<i class="bi bi-truck text-info fs-4"></i>
+								</div>
+								<span class="badge bg-primary">@proveedor.Productos.Count productos</span>
+							</div>
+							<h5 class="card-title mb-1">@proveedor.Nombre</h5>
+							<div class="mb-3">
+								<p class="card-text mb-1">
+									<i class="bi bi-envelope me-2 text-muted"></i>
+									<a href="mailto:@proveedor.Email" class="text-decoration-none">@proveedor.Email</a>
+								</p>
+								<p class="card-text mb-0">
+									<i class="bi bi-telephone me-2 text-muted"></i>
+									<span>@proveedor.Telefono</span>
+								</p>
+							</div>
+						</div>
+						<div class="card-footer bg-transparent border-0 pt-0">
+							<div class="d-flex justify-content-end gap-2">
+								<a asp-action="Detalles" asp-route-id="@proveedor.Id" class="btn btn-sm btn-outline-info">
+									<i class="bi bi-eye me-1"></i>Detalles
+								</a>
+								<a asp-action="Editar" asp-route-id="@proveedor.Id" class="btn btn-sm btn-outline-warning">
+									<i class="bi bi-pencil me-1"></i>Editar
+								</a>
+								<a asp-action="Eliminar" asp-route-id="@proveedor.Id" class="btn btn-sm btn-outline-danger">
+									<i class="bi bi-trash"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+		}
+		else
+		{
+			<div class="col-12">
+				<div class="card border-0 shadow-sm">
+					<div class="card-body text-center py-5">
+						<i class="bi bi-inbox fs-1 text-muted"></i>
+						<p class="text-muted mt-2 mb-3">No hay proveedores registrados</p>
+						<a asp-action="Crear" class="btn btn-info">
+							<i class="bi bi-plus-lg me-1"></i>Crear primer proveedor
+						</a>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
 </div>
