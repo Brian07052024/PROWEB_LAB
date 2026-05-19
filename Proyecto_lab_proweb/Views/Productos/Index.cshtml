@@ -1,200 +1,200 @@
 @model Proyecto_lab_proweb.ViewModels.ProductoListaViewModel
 
 @{
-    ViewData["Title"] = "Productos";
+	ViewData["Title"] = "Productos";
 }
 
 <div class="container-fluid">
-    <!-- Encabezado -->
-  <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-  <h1 class="h3 mb-0">
-         <i class="bi bi-box me-2"></i>Gestion de Productos
-   </h1>
-       <p class="text-muted mb-0">Administra el inventario de productos</p>
-        </div>
- <a asp-action="Crear" class="btn btn-primary">
-     <i class="bi bi-plus-lg me-1"></i>Nuevo Producto
-        </a>
-    </div>
+	<!-- Encabezado -->
+	<div class="d-flex justify-content-between align-items-center mb-4">
+		<div>
+			<h1 class="h3 mb-0">
+				<i class="bi bi-box me-2"></i>Gestion de Productos
+			</h1>
+			<p class="text-muted mb-0">Administra el inventario de productos</p>
+		</div>
+		<a asp-action="Crear" class="btn btn-primary">
+			<i class="bi bi-plus-lg me-1"></i>Nuevo Producto
+		</a>
+	</div>
 
-  <!-- Filtros y Busqueda -->
-    <div class="card border-0 shadow-sm mb-4">
-    <div class="card-body">
- <form method="get" asp-action="Index" class="row g-3">
-       <div class="col-md-5">
-       <div class="input-group">
-    <span class="input-group-text bg-white">
-          <i class="bi bi-search"></i>
-      </span>
-     <input type="text" name="busqueda" class="form-control" 
-        placeholder="Buscar por nombre o descripcion..." 
-       value="@Model.TerminoBusqueda" />
-  </div>
-   </div>
-      <div class="col-md-4">
-       <select name="categoriaId" class="form-select" asp-items="ViewBag.Categorias">
-  <option value="">-- Todas las categorias --</option>
-   </select>
-      </div>
-          <div class="col-md-3">
-        <div class="d-flex gap-2">
-       <button type="submit" class="btn btn-primary flex-grow-1">
-        <i class="bi bi-filter me-1"></i>Filtrar
-    </button>
-           <a asp-action="Index" class="btn btn-outline-secondary">
- <i class="bi bi-x-lg"></i>
-       </a>
-     </div>
-       </div>
-       </form>
-        </div>
-    </div>
+	<!-- Filtros y Busqueda -->
+	<div class="card border-0 shadow-sm mb-4">
+		<div class="card-body">
+			<form method="get" asp-action="Index" class="row g-3">
+				<div class="col-md-5">
+					<div class="input-group">
+						<span class="input-group-text bg-white">
+							<i class="bi bi-search"></i>
+						</span>
+						<input type="text" name="busqueda" class="form-control"
+							   placeholder="Buscar por nombre o descripcion..."
+							   value="@Model.TerminoBusqueda" />
+					</div>
+				</div>
+				<div class="col-md-4">
+					<select name="categoriaId" class="form-select" asp-items="ViewBag.Categorias">
+						<option value="">-- Todas las categorias --</option>
+					</select>
+				</div>
+				<div class="col-md-3">
+					<div class="d-flex gap-2">
+						<button type="submit" class="btn btn-primary flex-grow-1">
+							<i class="bi bi-filter me-1"></i>Filtrar
+						</button>
+						<a asp-action="Index" class="btn btn-outline-secondary">
+							<i class="bi bi-x-lg"></i>
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 
-    <!-- Informacion de resultados -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
-   <span class="text-muted">
-   @if (Model.TotalRegistros > 0)
- {
-  <text>Mostrando @((Model.PaginaActual - 1) * Model.RegistrosPorPagina + 1) - @Math.Min(Model.PaginaActual * Model.RegistrosPorPagina, Model.TotalRegistros) de @Model.TotalRegistros productos</text>
-  }
-    else
-  {
-<text>No se encontraron productos</text>
-        }
- </span>
-   </div>
+	<!-- Informacion de resultados -->
+	<div class="d-flex justify-content-between align-items-center mb-3">
+		<span class="text-muted">
+			@if (Model.TotalRegistros > 0)
+			{
+				<text>Mostrando @((Model.PaginaActual - 1) * Model.RegistrosPorPagina + 1) - @Math.Min(Model.PaginaActual * Model.RegistrosPorPagina, Model.TotalRegistros) de @Model.TotalRegistros productos</text>
+			}
+			else
+			{
+				<text>No se encontraron productos</text>
+			}
+		</span>
+	</div>
 
-    <!-- Tabla de Productos -->
-    <div class="card border-0 shadow-sm">
-   <div class="table-responsive">
-   <table class="table table-hover align-middle mb-0">
-        <thead class="table-light">
-       <tr>
-      <th style="width: 25%">Nombre</th>
-    <th style="width: 20%">Descripcion</th>
-     <th class="text-end" style="width: 12%">Precio</th>
- <th class="text-center" style="width: 10%">Stock</th>
-      <th style="width: 13%">Categoria</th>
-        <th style="width: 12%">Proveedor</th>
-     <th class="text-center" style="width: 8%">Acciones</th>
-   </tr>
-  </thead>
-    <tbody>
-    @if (Model.Productos.Any())
-       {
-   @foreach (var producto in Model.Productos)
-        {
-  <tr>
-          <td>
-    <div class="fw-medium">@producto.Nombre</div>
-       </td>
-     <td>
-    <span class="text-muted small">
-   @(producto.Descripcion?.Length > 50 ? producto.Descripcion.Substring(0, 50) + "..." : producto.Descripcion)
-    </span>
-          </td>
-     <td class="text-end">
-      <span class="fw-medium text-success">@producto.Precio.ToString("C")</span>
-      </td>
-       <td class="text-center">
-       @if (producto.Stock == 0)
-        {
-         <span class="badge bg-danger">Agotado</span>
-       }
-     else if (producto.Stock <= 10)
-  {
-     <span class="badge bg-warning text-dark">@producto.Stock</span>
-  }
-      else
-  {
-      <span class="badge bg-success">@producto.Stock</span>
-    }
-     </td>
-      <td>
-      <span class="badge bg-secondary">@producto.Categoria?.Nombre</span>
-       </td>
-     <td>
-  <span class="text-muted small">@producto.Proveedor?.Nombre</span>
-  </td>
-        <td class="text-center">
-  <div class="btn-group btn-group-sm">
-     <a asp-action="Detalles" asp-route-id="@producto.Id" class="btn btn-outline-info" title="Ver detalles">
-   <i class="bi bi-eye"></i>
-   </a>
-       <a asp-action="Editar" asp-route-id="@producto.Id" class="btn btn-outline-warning" title="Editar">
-     <i class="bi bi-pencil"></i>
-        </a>
-      <a asp-action="Eliminar" asp-route-id="@producto.Id" class="btn btn-outline-danger" title="Eliminar">
-    <i class="bi bi-trash"></i>
-         </a>
-     </div>
-       </td>
-  </tr>
-   }
-      }
-        else
-   {
-    <tr>
-      <td colspan="7" class="text-center py-5">
-     <i class="bi bi-inbox fs-1 text-muted"></i>
-    <p class="text-muted mt-2 mb-0">No se encontraron productos</p>
-        @if (!string.IsNullOrWhiteSpace(Model.TerminoBusqueda) || Model.CategoriaFiltro.HasValue)
-      {
-       <a asp-action="Index" class="btn btn-link">Limpiar filtros</a>
-          }
-        </td>
-       </tr>
-         }
-   </tbody>
-        </table>
-  </div>
- </div>
+	<!-- Tabla de Productos -->
+	<div class="card border-0 shadow-sm">
+		<div class="table-responsive">
+			<table class="table table-hover align-middle mb-0">
+				<thead class="table-light">
+					<tr>
+						<th style="width: 25%">Nombre</th>
+						<th style="width: 20%">Descripcion</th>
+						<th class="text-end" style="width: 12%">Precio</th>
+						<th class="text-center" style="width: 10%">Stock</th>
+						<th style="width: 13%">Categoria</th>
+						<th style="width: 12%">Proveedor</th>
+						<th class="text-center" style="width: 8%">Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					@if (Model.Productos.Any())
+					{
+						@foreach (var producto in Model.Productos)
+						{
+							<tr>
+								<td>
+									<div class="fw-medium">@producto.Nombre</div>
+								</td>
+								<td>
+									<span class="text-muted small">
+										@(producto.Descripcion?.Length > 50 ? producto.Descripcion.Substring(0, 50) + "..." : producto.Descripcion)
+									</span>
+								</td>
+								<td class="text-end">
+									<span class="fw-medium text-success">@producto.Precio.ToString("C")</span>
+								</td>
+								<td class="text-center">
+									@if (producto.Stock == 0)
+									{
+										<span class="badge bg-danger">Agotado</span>
+									}
+									else if (producto.Stock <= 10)
+									{
+										<span class="badge bg-warning text-dark">@producto.Stock</span>
+									}
+									else
+									{
+										<span class="badge bg-success">@producto.Stock</span>
+									}
+								</td>
+								<td>
+									<span class="badge bg-secondary">@producto.Categoria?.Nombre</span>
+								</td>
+								<td>
+									<span class="text-muted small">@producto.Proveedor?.Nombre</span>
+								</td>
+								<td class="text-center">
+									<div class="btn-group btn-group-sm">
+										<a asp-action="Detalles" asp-route-id="@producto.Id" class="btn btn-outline-info" title="Ver detalles">
+											<i class="bi bi-eye"></i>
+										</a>
+										<a asp-action="Editar" asp-route-id="@producto.Id" class="btn btn-outline-warning" title="Editar">
+											<i class="bi bi-pencil"></i>
+										</a>
+										<a asp-action="Eliminar" asp-route-id="@producto.Id" class="btn btn-outline-danger" title="Eliminar">
+											<i class="bi bi-trash"></i>
+										</a>
+									</div>
+								</td>
+							</tr>
+						}
+					}
+					else
+					{
+						<tr>
+							<td colspan="7" class="text-center py-5">
+								<i class="bi bi-inbox fs-1 text-muted"></i>
+								<p class="text-muted mt-2 mb-0">No se encontraron productos</p>
+								@if (!string.IsNullOrWhiteSpace(Model.TerminoBusqueda) || Model.CategoriaFiltro.HasValue)
+								{
+									<a asp-action="Index" class="btn btn-link">Limpiar filtros</a>
+								}
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
 
-    <!-- Paginacion -->
-    @if (Model.TotalPaginas > 1)
-    {
-   <nav class="mt-4">
-   <ul class="pagination justify-content-center">
-           <li class="page-item @(Model.TienePaginaAnterior ? "" : "disabled")">
-          <a class="page-link" asp-action="Index" 
-     asp-route-busqueda="@Model.TerminoBusqueda"
-   asp-route-categoriaId="@Model.CategoriaFiltro"
-    asp-route-pagina="@(Model.PaginaActual - 1)">
-        <i class="bi bi-chevron-left"></i> Anterior
-      </a>
-  </li>
-   
- @for (int i = 1; i <= Model.TotalPaginas; i++)
-  {
-     var paginaActiva = i == Model.PaginaActual;
-  // Mostrar solo paginas cercanas a la actual
-      if (i == 1 || i == Model.TotalPaginas || (i >= Model.PaginaActual - 2 && i <= Model.PaginaActual + 2))
-         {
-   <li class="page-item @(paginaActiva ? "active" : "")">
-  <a class="page-link" asp-action="Index"
- asp-route-busqueda="@Model.TerminoBusqueda"
-        asp-route-categoriaId="@Model.CategoriaFiltro"
-       asp-route-pagina="@i">@i</a>
- </li>
-     }
-          else if (i == Model.PaginaActual - 3 || i == Model.PaginaActual + 3)
-         {
-        <li class="page-item disabled">
-        <span class="page-link">...</span>
-              </li>
- }
-       }
-    
-     <li class="page-item @(Model.TienePaginaSiguiente ? "" : "disabled")">
-<a class="page-link" asp-action="Index"
- asp-route-busqueda="@Model.TerminoBusqueda"
-     asp-route-categoriaId="@Model.CategoriaFiltro"
-        asp-route-pagina="@(Model.PaginaActual + 1)">
-     Siguiente <i class="bi bi-chevron-right"></i>
-    </a>
-     </li>
-           </ul>
-    </nav>
-    }
+	<!-- Paginacion -->
+	@if (Model.TotalPaginas > 1)
+	{
+		<nav class="mt-4">
+			<ul class="pagination justify-content-center">
+				<li class="page-item @(Model.TienePaginaAnterior ? "" : "disabled")">
+					<a class="page-link" asp-action="Index"
+					   asp-route-busqueda="@Model.TerminoBusqueda"
+					   asp-route-categoriaId="@Model.CategoriaFiltro"
+					   asp-route-pagina="@(Model.PaginaActual - 1)">
+						<i class="bi bi-chevron-left"></i> Anterior
+					</a>
+				</li>
+
+				@for (int i = 1; i <= Model.TotalPaginas; i++)
+				{
+					var paginaActiva = i == Model.PaginaActual;
+					// Mostrar solo paginas cercanas a la actual
+					if (i == 1 || i == Model.TotalPaginas || (i >= Model.PaginaActual - 2 && i <= Model.PaginaActual + 2))
+					{
+						<li class="page-item @(paginaActiva ? "active" : "")">
+							<a class="page-link" asp-action="Index"
+							   asp-route-busqueda="@Model.TerminoBusqueda"
+							   asp-route-categoriaId="@Model.CategoriaFiltro"
+							   asp-route-pagina="@i">@i</a>
+						</li>
+					}
+					else if (i == Model.PaginaActual - 3 || i == Model.PaginaActual + 3)
+					{
+						<li class="page-item disabled">
+							<span class="page-link">...</span>
+						</li>
+					}
+				}
+
+				<li class="page-item @(Model.TienePaginaSiguiente ? "" : "disabled")">
+					<a class="page-link" asp-action="Index"
+					   asp-route-busqueda="@Model.TerminoBusqueda"
+					   asp-route-categoriaId="@Model.CategoriaFiltro"
+					   asp-route-pagina="@(Model.PaginaActual + 1)">
+						Siguiente <i class="bi bi-chevron-right"></i>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	}
 </div>

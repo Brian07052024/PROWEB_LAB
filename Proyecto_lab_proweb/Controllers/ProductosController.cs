@@ -46,9 +46,9 @@ namespace Proyecto_lab_proweb.Controllers
 
             // Aplicar paginacion
             var productos = await consulta
-       .OrderBy(p => p.Nombre)
-          .Skip((pagina - 1) * RegistrosPorPagina)
-      .Take(RegistrosPorPagina)
+            .OrderBy(p => p.Nombre)
+            .Skip((pagina - 1) * RegistrosPorPagina)
+            .Take(RegistrosPorPagina)
             .ToListAsync();
 
             var viewModel = new ProductoListaViewModel
