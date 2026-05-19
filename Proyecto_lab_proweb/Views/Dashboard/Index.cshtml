@@ -4,14 +4,17 @@
 	ViewData["Title"] = "Dashboard";
 }
 
-<div class="container-fluid">
+<div class="container-fluid position-relative overflow-hidden p-0" style="min-height: 100vh;">
+	<div class="position-absolute top-0 start-0 w-100 h-100" style="background-image: url('/img/fime.png'); background-size: cover; background-position: center; background-repeat: no-repeat; filter: blur(8px); transform: scale(1.05);"></div>
+	<div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.45);"></div>
+	<div class="position-relative px-4 py-4">
 	<!-- Encabezado -->
 	<div class="d-flex justify-content-between align-items-center mb-4">
 		<div>
-			<h1 class="h3 mb-0">
-				<i class="bi bi-speedometer2 me-2"></i>Dashboard
+			<h1 class="h3 mb-0 text-white">
+				<i class="bi bi-speedometer2 me-2 text-white"></i>Dashboard
 			</h1>
-			<p class="text-muted mb-0">Bienvenido al panel de administracion</p>
+			<p class="text-white mb-0">Bienvenido al panel de administracion</p>
 		</div>
 		<div>
 			<span class="badge bg-primary fs-6">
