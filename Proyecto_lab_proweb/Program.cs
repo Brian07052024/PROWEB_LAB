@@ -43,6 +43,23 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+// Inicializar base de datos con datos de prueba
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<ApplicationDbContext>();
+        var userManager = services.GetRequiredService<UserManager<UsuarioAplicacion>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        await DbInitializer.InicializarAsync(context, userManager, roleManager);
+    }
+  catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+ logger.LogError(ex, "Error al inicializar la base de datos");
+    }
+}
 
 // Configurar el pipeline de HTTP
 if (!app.Environment.IsDevelopment())
