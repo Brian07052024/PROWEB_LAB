@@ -1,18 +1,52 @@
-Import System.Runtime.InteropServices
+# 4.1 Documentación técnica
 
-' En proyectos de estilo SDK como este, varios atributos de ensamblado que definían
-' en este archivo se agregan ahora automáticamente durante la compilación y se rellenan
-' con valores definidos en las propiedades del proyecto. Para obtener detalles acerca
-' de los atributos que se incluyen y cómo personalizar este proceso, consulte https://aka.ms/assembly-info-properties
+# 4.1 Documentación técnica
+## Cómo se monta el proyecto
+1. Clonar el repositorio.
+2. Restaurar dependencias.
+3. Configurar la cadena de conexión en `appsettings.json`.
+4. Ejecutar migraciones de base de datos.
+5. Iniciar la aplicacion.
 
+## Tecnologías utilizadas
+- .NET 9
+- ASP.NET Core (Razor Pages/MVC)
+- Entity Framework Core
+- SQL Server (o el motor configurado)
+- Bootstrap
 
-' Al establecer ComVisible en false, se consigue que los tipos de este ensamblado
-' no sean visibles para los componentes COM. Si tiene que acceder a un tipo en este
-' ensamblado desde COM, establezca el atributo ComVisible en true en ese tipo.
+## C�mo se ejecuta
+```sh
+dotnet restore
+dotnet ef database update
+dotnet run
+```
+Acceder a `https://localhost:xxxx`.
 
-<Assembly: ComVisible(False)> 
+---
 
-' El siguiente GUID es para el identificador de typelib, si este proyecto se expone
-' en COM.
+# 4.2 Documentación de usuario
 
-<Assembly: Guid("70234905-853a-44c3-8619-06dba1cde70d")> 
+## Funcionalidades
+- Autenticación y roles (admin/usuario).
+- Gestión de productos.
+- Gestión de categorías.
+- Gestión de proveedores.
+- Catálogo público.
+- Dashboard administrativo.
+
+## Cómo se utiliza
+- **Crear cuenta**: ir a `Registro`, completar formulario y enviar.
+- **Iniciar sesión**: ir a `Login`, ingresar credenciales.
+- **Crear producto**: ir a `Productos` → `Crear`, completar datos y guardar.
+- **Editar producto**: ir a `Productos` → `Editar`.
+- **Eliminar producto**: ir a `Productos` → `Eliminar`.
+- **Crear categoría**: ir a `Categorías` → `Crear`.
+- **Crear proveedor**: ir a `Proveedores` → `Crear`.
+- **Compra** (si aplica en tu versión): seleccionar producto en el catálogo y seguir el flujo definido.
+
+## Requisitos previos
+- Contar con usuario activo.
+- Para administración: rol `Admin`.
+- Base de datos inicializada.
+- Acceso previo otorgado por un administrador (si aplica).
