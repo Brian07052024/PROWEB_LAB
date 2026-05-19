@@ -12,7 +12,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Configurar ASP.NET Core Identity
 builder.Services.AddIdentity<UsuarioAplicacion, IdentityRole>(options =>
 {
-    // Configuracion de contraseñass
+    // Configuracion de contraseÃ±ass
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
     options.Password.RequireUppercase = true;
@@ -62,5 +62,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+// aqui esta la app run:
 app.Run();
