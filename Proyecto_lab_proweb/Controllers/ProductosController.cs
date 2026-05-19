@@ -9,7 +9,7 @@ using Proyecto_lab_proweb.ViewModels;
 namespace Proyecto_lab_proweb.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class ProductosController : Controller
+    public class ProductosController : Controllerz
     {
         private readonly ApplicationDbContext _context;
         private const int RegistrosPorPagina = 10;
@@ -201,9 +201,9 @@ namespace Proyecto_lab_proweb.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductoExiste(int id)
+        private async Task<bool> ProductoExiste(int id)
         {
-            return _context.Productos.Any(e => e.Id == id);
+            return await _context.Productos.AnyAsync(e => e.Id == id);
         }
     }
 }
